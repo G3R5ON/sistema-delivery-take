@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú - TAKE</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Chifa & Pollería</small>
+  </div>
+
+  <nav id="navbarLinks">
+    <a href="index.html">Inicio</a>
+    <a class="activo" href="menu.html">Menú</a>
+    <a href="login.html">Personal</a>
+  </nav>
+
+  <div class="cart-icon">
+    🛒 <span id="contadorCarrito">0</span>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="menu-area">
+    <div class="titulo">
+      <h1>Menú de Productos</h1>
+      <p>Selecciona tus platos favoritos y agrégalos al carrito.</p>
+    </div>
+
+    <input 
+      type="text" 
+      id="buscador" 
+      placeholder="Buscar productos..." 
+      oninput="filtrarProductos()"
+      class="buscador"
+    >
+
+    <div id="productos" class="productos-grid"></div>
+  </section>
+
+  <aside class="carrito-panel">
+    <h2>Mi Carrito</h2>
+
+    <div id="carrito"></div>
+
+    <div class="total-box">
+      <span>Total</span>
+      <strong>S/ <span id="total">0.00</span></strong>
+    </div>
+
+    <button class="btn-continuar" onclick="irAPedido()">
+      Continuar pedido
+    </button>
+  </aside>
+
+</main>
+<script src="js/session.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

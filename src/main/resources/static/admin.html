@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Admin - TAKE</title>
+
+  <link rel="icon" type="image/png" href="img/logo.png">
+
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<script>
+  const usuarioAdmin = JSON.parse(localStorage.getItem("usuarioAdminTAKE"));
+
+  if (!usuarioAdmin) {
+    window.location.href = "login.html";
+  }
+</script>
+
+<header class="navbar">
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Panel Administrador</small>
+  </div>
+
+  <nav>
+    <a class="activo" href="admin.html">Pedidos</a>
+    <a href="productos-admin.html">Productos</a>
+    <a href="categorias-admin.html">Categorías</a>
+    <a href="repartidores-admin.html">Repartidores</a>
+    <a href="index.html">Inicio</a>
+    <a href="#" onclick="cerrarSesion()">Salir</a>
+  </nav>
+</header>
+
+<main class="contenedor">
+
+  <section class="bienvenida">
+    <div>
+      <h1>Pedidos Delivery</h1>
+      <p>Gestión de pedidos en tiempo real del restaurante TAKE.</p>
+    </div>
+
+    <button onclick="listarPedidos()">Actualizar pedidos</button>
+  </section>
+
+  <section class="stats">
+    <div class="stat-card">
+      <span>Total pedidos</span>
+      <strong id="totalPedidos">0</strong>
+    </div>
+
+    <div class="stat-card pendiente">
+      <span>Pendientes</span>
+      <strong id="totalPendientes">0</strong>
+    </div>
+
+    <div class="stat-card camino">
+      <span>En camino</span>
+      <strong id="totalCamino">0</strong>
+    </div>
+
+    <div class="stat-card entregado">
+      <span>Entregados</span>
+      <strong id="totalEntregados">0</strong>
+    </div>
+  </section>
+
+  <section class="filtros">
+    <button onclick="filtrarPedidos('TODOS')">Todos</button>
+    <button onclick="filtrarPedidos('PENDIENTE')">Pendiente</button>
+    <button onclick="filtrarPedidos('EN_CAMINO')">En camino</button>
+    <button onclick="filtrarPedidos('ENTREGADO')">Entregado</button>
+  </section>
+
+  <section class="tabla-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Detalle</th>
+          <th>Método Pago</th>
+          <th>Estado Pago</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Repartidor</th>
+          <th>Acción</th>
+          <th>Comprobante</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+
+      <tbody id="tablaPedidos"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="js/admin.js?v=4"></script>
+
+</body>
+</html>

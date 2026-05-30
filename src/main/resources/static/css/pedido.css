@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.navbar {
+  height: 80px;
+  background: #080808;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px;
+}
+
+.logo span {
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.logo small {
+  display: block;
+  font-size: 11px;
+  color: #ccc;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 14px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #e60012;
+}
+
+.contenedor {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 25px;
+  padding: 35px;
+}
+
+.formulario h1 {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+.formulario p {
+  color: #666;
+}
+
+.card,
+.resumen {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 5px 16px rgba(0,0,0,.09);
+  margin-bottom: 20px;
+}
+
+.card h2,
+.resumen h2 {
+  margin-top: 0;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.campo-pago {
+  display: none;
+  margin-top: 10px;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-principal,
+.btn-secundario {
+  padding: 15px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-principal {
+  background: #e60012;
+  color: white;
+}
+
+.btn-principal:hover {
+  background: #b8000e;
+}
+
+.btn-secundario {
+  background: #222;
+  color: white;
+}
+
+.btn-secundario:hover {
+  background: #444;
+}
+
+.resumen {
+  height: fit-content;
+  position: sticky;
+  top: 25px;
+}
+
+.item-resumen {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.item-resumen strong {
+  display: block;
+}
+
+.item-resumen span {
+  color: #666;
+}
+
+.total-box {
+  background: #f1f1f1;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.total-box strong {
+  color: #e60012;
+}
+
+@media (max-width: 900px) {
+  .contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .resumen {
+    position: static;
+  }
+}

@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.navbar {
+  height: 80px;
+  background: #080808;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px;
+}
+
+.logo span {
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.logo small {
+  display: block;
+  font-size: 11px;
+  color: #ccc;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 14px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #e60012;
+}
+
+.contenedor {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.ticket {
+  width: 650px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  padding: 30px;
+}
+
+.ticket-header {
+  text-align: center;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket-header h1 {
+  color: #e60012;
+  margin-bottom: 5px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.info-box {
+  background: #f5f5f5;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.info-box span {
+  display: block;
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.info-box strong {
+  font-size: 16px;
+}
+
+.detalle {
+  margin-top: 20px;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+  padding: 18px 0;
+}
+
+.detalle h3 {
+  margin-top: 0;
+}
+
+.detalle-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-box {
+  margin-top: 20px;
+  background: #111;
+  color: white;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+}
+
+.total-box strong {
+  color: #ff2b39;
+}
+
+.estado {
+  display: inline-block;
+  font-weight: bold;
+  padding: 7px 12px;
+  border-radius: 20px;
+}
+
+.PENDIENTE {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.EN_CAMINO {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.ENTREGADO {
+  background: #d4edda;
+  color: #155724;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.acciones button,
+.acciones a {
+  background: #e60012;
+  color: white;
+  border: none;
+  padding: 13px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.acciones a {
+  background: #222;
+}
+
+.acciones button:hover {
+  background: #b8000e;
+}
+
+.acciones a:hover {
+  background: #444;
+}
+
+@media print {
+  .navbar,
+  .acciones {
+    display: none;
+  }
+
+  body {
+    background: white;
+  }
+
+  .contenedor {
+    padding: 0;
+  }
+
+  .ticket {
+    box-shadow: none;
+    width: 100%;
+  }
+}

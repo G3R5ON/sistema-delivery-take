@@ -1,0 +1,296 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+.navbar {
+  min-height: 80px;
+  background: #080808;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px;
+}
+
+.logo span {
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.logo small {
+  display: block;
+  color: #ccc;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav .activo {
+  color: #e60012;
+}
+
+.contenedor {
+  padding: 35px;
+}
+
+.bienvenida {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bienvenida h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.bienvenida p {
+  color: #777;
+  margin-bottom: 0;
+}
+
+.bienvenida button {
+  background: #e60012;
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bienvenida button:hover {
+  background: #b8000e;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+  border-left: 6px solid #111;
+  min-height: 110px;
+}
+
+.stat-card span {
+  display: block;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 34px;
+  color: #111;
+}
+
+.stat-card.pendiente {
+  border-left-color: #ffc107;
+}
+
+.stat-card.camino {
+  border-left-color: #0d6efd;
+}
+
+.stat-card.entregado {
+  border-left-color: #198754;
+}
+
+.filtros {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  box-shadow: 0 5px 16px rgba(0,0,0,.08);
+}
+
+.filtros button {
+  background: white;
+  color: #222;
+  border: 1px solid #ddd;
+  padding: 11px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filtros button:hover {
+  background: #e60012;
+  color: white;
+  border-color: #e60012;
+}
+
+.tabla-container {
+  background: white;
+  border-radius: 18px;
+  overflow-x: auto;
+  box-shadow: 0 5px 16px rgba(0,0,0,.09);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1350px;
+}
+
+th {
+  background: #111;
+  color: white;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.estado {
+  font-weight: bold;
+  padding: 7px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.PENDIENTE {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.EN_CAMINO {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.ENTREGADO {
+  background: #d4edda;
+  color: #155724;
+}
+
+.select-repartidor {
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  background: white;
+  font-weight: bold;
+  min-width: 160px;
+  cursor: pointer;
+}
+
+.select-repartidor:focus {
+  outline: none;
+  border-color: #e60012;
+}
+
+.btn-estado,
+.btn-ver {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  margin: 2px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.btn-pendiente {
+  background: #856404;
+}
+
+.btn-camino {
+  background: #004085;
+}
+
+.btn-entregado {
+  background: #155724;
+}
+
+.btn-ver {
+  background: #e60012;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-ver:hover,
+.btn-estado:hover {
+  opacity: .85;
+}
+
+.detalle {
+  text-align: left;
+  min-width: 230px;
+}
+
+@media (max-width: 1000px) {
+  .contenedor {
+    padding: 15px;
+  }
+
+  .bienvenida {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    height: auto;
+    flex-direction: column;
+    padding: 18px;
+    gap: 12px;
+  }
+
+  nav {
+    justify-content: center;
+  }
+}

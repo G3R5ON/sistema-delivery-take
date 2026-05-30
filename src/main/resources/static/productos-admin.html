@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos - TAKE</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="css/productos-admin.css">
+</head>
+<body>
+
+<script>
+  const usuarioAdmin = JSON.parse(localStorage.getItem("usuarioAdminTAKE"));
+
+  if (!usuarioAdmin) {
+    window.location.href = "login.html";
+  }
+
+  if (usuarioAdmin.rol !== "ADMIN") {
+    alert("No tienes permiso para acceder a esta sección.");
+    window.location.href = "admin.html";
+  }
+</script>
+
+<header class="navbar">
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Gestión de Productos</small>
+  </div>
+
+  <nav>
+    <a href="admin.html">Pedidos</a>
+    <a class="activo" href="productos-admin.html">Productos</a>
+    <a href="categorias-admin.html">Categorías</a>
+    <a href="repartidores-admin.html">Repartidores</a>
+    <a href="index.html">Inicio</a>
+    <a href="#" onclick="cerrarSesion()">Salir</a>
+  </nav>
+</header>
+
+<main class="contenedor">
+
+  <section class="form-card">
+    <h1>Gestión de Productos</h1>
+    <p>Agrega, edita o elimina productos del menú.</p>
+
+    <input type="hidden" id="productoId">
+
+    <label>Nombre del producto</label>
+    <input id="nombre" type="text" placeholder="Ej: Arroz chaufa">
+
+    <label>Precio</label>
+    <input id="precio" type="number" step="0.01" placeholder="Ej: 15.00">
+
+    <label>Categoría</label>
+    <select id="categoria"></select>
+
+    <button class="btn-principal" onclick="guardarProducto()">Guardar producto</button>
+    <button class="btn-secundario" onclick="limpiarFormulario()">Limpiar</button>
+  </section>
+
+  <section class="tabla-card">
+    <div class="tabla-header">
+      <h2>Lista de productos</h2>
+      <button onclick="listarProductos()">Actualizar</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaProductos"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="js/productos-admin.js"></script>
+</body>
+</html>

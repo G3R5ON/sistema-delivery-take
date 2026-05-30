@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.95), rgba(80,0,8,.9)),
+    linear-gradient(135deg, #111, #5c0008);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 22px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo span {
+  font-size: 42px;
+  font-weight: 900;
+  color: #111;
+}
+
+.logo small {
+  display: block;
+  color: #e60012;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 12px 0 6px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+button {
+  width: 100%;
+  background: #e60012;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+button:hover {
+  background: #b8000e;
+}
+
+.volver {
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+
+.volver:hover {
+  color: #e60012;
+}

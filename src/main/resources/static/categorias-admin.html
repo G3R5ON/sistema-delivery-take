@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Categorías - TAKE</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="css/categorias-admin.css">
+</head>
+<body>
+
+<script>
+  const usuarioAdmin = JSON.parse(localStorage.getItem("usuarioAdminTAKE"));
+
+  if (!usuarioAdmin) {
+    window.location.href = "login.html";
+  }
+
+  if (usuarioAdmin.rol !== "ADMIN") {
+    alert("No tienes permiso para acceder a esta sección.");
+    window.location.href = "admin.html";
+  }
+</script>
+
+<header class="navbar">
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Gestión de Categorías</small>
+  </div>
+
+  <nav>
+    <a href="admin.html">Pedidos</a>
+    <a href="productos-admin.html">Productos</a>
+    <a class="activo" href="categorias-admin.html">Categorías</a>
+    <a href="repartidores-admin.html">Repartidores</a>
+    <a href="index.html">Inicio</a>
+    <a href="#" onclick="cerrarSesion()">Salir</a>
+  </nav>
+</header>
+
+<main class="contenedor">
+
+  <section class="form-card">
+    <h1>Gestión de Categorías</h1>
+    <p>Agrega, edita o elimina categorías del menú.</p>
+
+    <input type="hidden" id="categoriaId">
+
+    <label>Nombre de la categoría</label>
+    <input id="nombre" type="text" placeholder="Ej: CHAUFA">
+
+    <label>Descripción</label>
+    <textarea id="descripcion" placeholder="Ej: Platos de arroz chaufa"></textarea>
+
+    <button class="btn-principal" onclick="guardarCategoria()">Guardar categoría</button>
+    <button class="btn-secundario" onclick="limpiarFormulario()">Limpiar</button>
+  </section>
+
+  <section class="tabla-card">
+    <div class="tabla-header">
+      <h2>Lista de categorías</h2>
+      <button onclick="listarCategorias()">Actualizar</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Categoría</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCategorias"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="js/categorias-admin.js"></script>
+</body>
+</html>

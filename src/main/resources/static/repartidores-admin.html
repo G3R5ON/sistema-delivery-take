@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Repartidores - TAKE</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="css/repartidores-admin.css?v=1">
+</head>
+<body>
+
+<script>
+  const usuarioAdmin = JSON.parse(localStorage.getItem("usuarioAdminTAKE"));
+
+  if (!usuarioAdmin) {
+    window.location.href = "login.html";
+  }
+
+  if (usuarioAdmin.rol !== "ADMIN") {
+    alert("No tienes permisos.");
+    window.location.href = "admin.html";
+  }
+</script>
+
+<header class="navbar">
+
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Gestión de Repartidores</small>
+  </div>
+
+  <nav>
+    <a href="admin.html">Pedidos</a>
+    <a href="productos-admin.html">Productos</a>
+    <a href="categorias-admin.html">Categorías</a>
+    <a class="activo" href="repartidores-admin.html">Repartidores</a>
+    <a href="index.html">Inicio</a>
+    <a href="#" onclick="cerrarSesion()">Salir</a>
+  </nav>
+
+</header>
+
+<main class="contenedor">
+
+  <section class="header">
+
+    <div>
+      <h1>Repartidores</h1>
+      <p>Gestión de usuarios repartidores.</p>
+    </div>
+
+  </section>
+
+  <section class="formulario">
+
+    <h2>Nuevo repartidor</h2>
+
+    <input
+      type="text"
+      id="nombre"
+      placeholder="Nombre completo"
+    >
+
+    <input
+      type="email"
+      id="correo"
+      placeholder="Correo"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Contraseña"
+    >
+
+    <button onclick="crearRepartidor()">
+      Crear repartidor
+    </button>
+
+  </section>
+
+  <section class="tabla-container">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody id="tablaRepartidores"></tbody>
+
+    </table>
+
+  </section>
+
+</main>
+
+<script src="js/repartidores-admin.js?v=1"></script>
+
+</body>
+</html>

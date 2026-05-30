@@ -1,0 +1,49 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comprobante - TAKE</title>
+
+  <link rel="icon" type="image/png" href="img/logo.png">
+
+  <link rel="stylesheet" href="css/comprobante.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <span>TAKE</span>
+    <small>Chifa & Pollería</small>
+  </div>
+
+  <nav id="navbarLinks">
+    <a href="index.html">Inicio</a>
+    <a href="menu.html">Nuevo pedido</a>
+    <a href="login.html">Personal</a>
+  </nav>
+</header>
+
+<main class="contenedor">
+  <section class="ticket">
+    <div class="ticket-header">
+      <h1>Pedido registrado</h1>
+      <p id="mensajeComprobante">
+        Gracias por realizar tu pedido en Restaurante TAKE.
+      </p>
+    </div>
+
+    <div id="comprobanteContenido"></div>
+
+    <div class="acciones">
+      <button id="btnImprimir" onclick="window.print()">Imprimir comprobante</button>
+      <a id="btnNuevoPedido" href="menu.html">Realizar otro pedido</a>
+      <a id="btnVolverPanel" href="admin.html" style="display:none;">Volver al panel</a>
+    </div>
+  </section>
+</main>
+
+<script src="js/session.js"></script>
+<script src="js/comprobante.js"></script>
+
+</body>
+</html>
