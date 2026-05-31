@@ -19,6 +19,10 @@ import com.take.restaurant.entity.Usuario;
 import com.take.restaurant.repository.HistorialEstadoPedidoRepository;
 import com.take.restaurant.repository.UsuarioRepository;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PedidoService {
 
+    private static final Logger logger = LoggerFactory.getLogger(PedidoService.class);
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
     private final ProductoRepository productoRepository;
@@ -36,6 +41,7 @@ public class PedidoService {
 
     @Transactional
     public PedidoResponseDTO crearPedido(PedidoRequestDTO request) {
+        validarPedido(request);
 
         Cliente cliente = new Cliente();
         cliente.setNombre(request.getClienteNombre());
@@ -101,6 +107,7 @@ public class PedidoService {
         pedidoGuardado.setDetalles(detalles);
 
         Pedido pedidoFinal = pedidoRepository.save(pedidoGuardado);
+        logger.info("Pedido registrado correctamente con ID: {}", pedidoFinal.getId());
 
         return convertirAResponseDTO(pedidoFinal);
     }
@@ -129,6 +136,13 @@ public class PedidoService {
         historial.setEstadoNuevo(nuevoEstado);
 
         historialRepository.save(historial);
+        logger.info(
+                "Pedido {} actualizado de {} a {} por el usuario {}",
+                pedido.getId(),
+                estadoAnterior,
+                nuevoEstado,
+                usuario.getNombre()
+        );
 
         return pedidoActualizado;
     }
@@ -196,6 +210,11 @@ public class PedidoService {
         pedido.setRepartidor(repartidor);
 
         Pedido pedidoActualizado = pedidoRepository.save(pedido);
+        logger.info(
+                "Pedido {} asignado al repartidor {}",
+                pedido.getId(),
+                repartidor.getNombre()
+        );
 
         return convertirAResponseDTO(pedidoActualizado);
     }
@@ -208,5 +227,28 @@ public class PedidoService {
         .stream()
         .map(this::convertirAResponseDTO)
         .toList();
+    }
+
+        private void validarPedido(PedidoRequestDTO request) {
+
+        if (StringUtils.isBlank(request.getClienteNombre())) {
+            throw new RuntimeException("El nombre del cliente es obligatorio");
+        }
+
+        if (StringUtils.isBlank(request.getTelefono())) {
+            throw new RuntimeException("El teléfono del cliente es obligatorio");
+        }
+
+        if (StringUtils.isBlank(request.getDireccion())) {
+            throw new RuntimeException("La dirección de entrega es obligatoria");
+        }
+
+        if (StringUtils.isBlank(request.getMetodoPago())) {
+            throw new RuntimeException("El método de pago es obligatorio");
+        }
+
+        if (request.getItems() == null || request.getItems().isEmpty()) {
+            throw new RuntimeException("El pedido debe tener al menos un producto");
+        }
     }
 }
