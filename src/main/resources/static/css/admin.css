@@ -74,6 +74,13 @@ nav .activo {
   margin-bottom: 0;
 }
 
+.acciones-superiores {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .bienvenida button {
   background: #e60012;
   color: white;
@@ -86,6 +93,22 @@ nav .activo {
 
 .bienvenida button:hover {
   background: #b8000e;
+}
+
+.btn-excel {
+  background: #198754;
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-excel:hover {
+  background: #146c43;
 }
 
 .stats {
@@ -154,6 +177,10 @@ nav .activo {
   background: #e60012;
   color: white;
   border-color: #e60012;
+}
+
+.filtro-excel {
+  padding: 11px 18px;
 }
 
 .tabla-container {
@@ -275,6 +302,10 @@ td {
 
   .stats {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .acciones-superiores {
+    width: 100%;
   }
 }
 

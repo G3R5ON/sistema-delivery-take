@@ -23,6 +23,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.google.common.base.Preconditions;
+
+import java.io.ByteArrayOutputStream;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -229,26 +238,117 @@ public class PedidoService {
         .toList();
     }
 
-        private void validarPedido(PedidoRequestDTO request) {
+    private void validarPedido(PedidoRequestDTO request) {
 
-        if (StringUtils.isBlank(request.getClienteNombre())) {
-            throw new RuntimeException("El nombre del cliente es obligatorio");
+            Preconditions.checkArgument(
+                    !StringUtils.isBlank(request.getClienteNombre()),
+                    "El nombre del cliente es obligatorio"
+            );
+
+            Preconditions.checkArgument(
+                    !StringUtils.isBlank(request.getTelefono()),
+                    "El teléfono del cliente es obligatorio"
+            );
+
+            Preconditions.checkArgument(
+                    !StringUtils.isBlank(request.getDireccion()),
+                    "La dirección de entrega es obligatoria"
+            );
+
+            Preconditions.checkArgument(
+                    !StringUtils.isBlank(request.getMetodoPago()),
+                    "El método de pago es obligatorio"
+            );
+
+            Preconditions.checkArgument(
+                    request.getItems() != null &&
+                    !request.getItems().isEmpty(),
+                    "El pedido debe tener al menos un producto"
+            );
         }
+     public byte[] exportarPedidosExcel() {
 
-        if (StringUtils.isBlank(request.getTelefono())) {
-            throw new RuntimeException("El teléfono del cliente es obligatorio");
-        }
+        List<Pedido> pedidos = listarPedidos();
 
-        if (StringUtils.isBlank(request.getDireccion())) {
-            throw new RuntimeException("La dirección de entrega es obligatoria");
-        }
+        try (Workbook workbook = new XSSFWorkbook();
+            ByteArrayOutputStream out = new ByteArrayOutputStream()) {
 
-        if (StringUtils.isBlank(request.getMetodoPago())) {
-            throw new RuntimeException("El método de pago es obligatorio");
-        }
+            Sheet sheet = workbook.createSheet("Pedidos TAKE");
 
-        if (request.getItems() == null || request.getItems().isEmpty()) {
-            throw new RuntimeException("El pedido debe tener al menos un producto");
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("ID");
+            header.createCell(1).setCellValue("Cliente");
+            header.createCell(2).setCellValue("Teléfono");
+            header.createCell(3).setCellValue("Dirección");
+            header.createCell(4).setCellValue("Detalle");
+            header.createCell(5).setCellValue("Método Pago");
+            header.createCell(6).setCellValue("Estado Pago");
+            header.createCell(7).setCellValue("Total");
+            header.createCell(8).setCellValue("Estado Pedido");
+            header.createCell(9).setCellValue("Repartidor");
+            header.createCell(10).setCellValue("Fecha");
+
+            int rowIndex = 1;
+
+            for (Pedido pedido : pedidos) {
+                Row row = sheet.createRow(rowIndex++);
+
+                row.createCell(0).setCellValue(pedido.getId());
+
+                row.createCell(1).setCellValue(
+                        pedido.getCliente() != null ? pedido.getCliente().getNombre() : "-"
+                );
+
+                row.createCell(2).setCellValue(
+                        pedido.getCliente() != null ? pedido.getCliente().getTelefono() : "-"
+                );
+
+                row.createCell(3).setCellValue(
+                        pedido.getCliente() != null ? pedido.getCliente().getDireccion() : "-"
+                );
+
+                row.createCell(4).setCellValue(
+                        pedido.getDetallePedido() != null ? pedido.getDetallePedido() : "-"
+                );
+
+                row.createCell(5).setCellValue(
+                        pedido.getMetodoPago() != null ? pedido.getMetodoPago() : "-"
+                );
+
+                row.createCell(6).setCellValue(
+                        pedido.getEstadoPago() != null ? pedido.getEstadoPago() : "-"
+                );
+
+                row.createCell(7).setCellValue(
+                        pedido.getTotal() != null ? pedido.getTotal().doubleValue() : 0
+                );
+
+                row.createCell(8).setCellValue(
+                        pedido.getEstado() != null ? pedido.getEstado() : "-"
+                );
+
+                row.createCell(9).setCellValue(
+                        pedido.getRepartidor() != null ? pedido.getRepartidor().getNombre() : "Sin asignar"
+                );
+
+                row.createCell(10).setCellValue(
+                        pedido.getFechaCreacion() != null ? pedido.getFechaCreacion().toString() : "-"
+                );
+            }
+
+            for (int i = 0; i <= 10; i++) {
+                sheet.autoSizeColumn(i);
+            }
+
+            workbook.write(out);
+
+            logger.info("Reporte Excel de pedidos generado correctamente");
+
+            return out.toByteArray();
+
+        } catch (Exception e) {
+            logger.error("Error al generar reporte Excel de pedidos", e);
+            throw new RuntimeException("No se pudo generar el reporte Excel");
         }
     }
 }

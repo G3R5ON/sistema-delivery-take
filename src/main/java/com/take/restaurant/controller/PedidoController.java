@@ -5,7 +5,13 @@ import com.take.restaurant.dto.PedidoResponseDTO;
 import com.take.restaurant.entity.Pedido;
 import com.take.restaurant.service.PedidoService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 
 import java.util.List;
 
@@ -52,5 +58,20 @@ public class PedidoController {
     @GetMapping("/repartidor/{idRepartidor}")
     public List<PedidoResponseDTO> listarPedidosPorRepartidor(@PathVariable Long idRepartidor) {
         return pedidoService.listarPedidosPorRepartidor(idRepartidor);
+    }
+    @GetMapping("/reporte/excel")
+    public ResponseEntity<byte[]> exportarPedidosExcel() {
+
+         byte[] excel = pedidoService.exportarPedidosExcel();
+
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=pedidos_take.xlsx"
+                )
+                .contentType(MediaType.parseMediaType(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                ))
+                .body(excel);
     }
 }

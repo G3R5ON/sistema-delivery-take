@@ -5,8 +5,7 @@
   <title>Panel Admin - TAKE</title>
 
   <link rel="icon" type="image/png" href="img/logo.png">
-
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=5">
 </head>
 <body>
 
@@ -42,7 +41,16 @@
       <p>Gestión de pedidos en tiempo real del restaurante TAKE.</p>
     </div>
 
-    <button onclick="listarPedidos()">Actualizar pedidos</button>
+    <div class="acciones-superiores">
+      <a
+        href="http://localhost:8084/api/pedidos/reporte/excel"
+        class="btn-excel"
+      >
+        📊 Exportar Excel
+      </a>
+
+      <button onclick="listarPedidos()">Actualizar pedidos</button>
+    </div>
   </section>
 
   <section class="stats">
@@ -72,6 +80,13 @@
     <button onclick="filtrarPedidos('PENDIENTE')">Pendiente</button>
     <button onclick="filtrarPedidos('EN_CAMINO')">En camino</button>
     <button onclick="filtrarPedidos('ENTREGADO')">Entregado</button>
+
+    <a
+      href="http://localhost:8084/api/pedidos/reporte/excel"
+      class="btn-excel filtro-excel"
+    >
+      📊 Exportar Excel
+    </a>
   </section>
 
   <section class="tabla-container">
@@ -100,7 +115,7 @@
 
 </main>
 
-<script src="js/admin.js?v=4"></script>
+<script src="js/admin.js?v=5"></script>
 
 </body>
 </html>
