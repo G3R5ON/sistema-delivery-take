@@ -54,6 +54,19 @@
     <label>Categoría</label>
     <select id="categoria"></select>
 
+    <label>Imagen del producto</label>
+    <input
+      id="imagenUrl"
+      type="text"
+      placeholder="Ej: img/productos/pollo_brasa_14.jpg"
+      oninput="mostrarVistaPrevia()"
+    >
+
+    <div class="preview-box">
+      <span>Vista previa</span>
+      <img id="previewImagen" src="img/productos/default.jpg" alt="Vista previa">
+    </div>
+
     <button class="btn-principal" onclick="guardarProducto()">Guardar producto</button>
     <button class="btn-secundario" onclick="limpiarFormulario()">Limpiar</button>
   </section>
@@ -68,6 +81,7 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Imagen</th>
           <th>Producto</th>
           <th>Precio</th>
           <th>Categoría</th>

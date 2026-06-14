@@ -48,9 +48,16 @@ function renderProductos(productos) {
   productos.forEach(producto => {
     const categoria = obtenerCategoria(producto);
 
+    const imagen = producto.imagenUrl
+      ? producto.imagenUrl
+      : "img/productos/default.jpg";
+
     contenedor.innerHTML += `
       <div class="producto-card">
-        <div class="producto-img">${iconoProducto(categoria)}</div>
+        <div class="producto-img">
+          <img src="${imagen}" alt="${producto.nombre}">
+        </div>
+
         <div class="producto-body">
           <p class="categoria">${categoria}</p>
           <h3>${producto.nombre}</h3>

@@ -45,12 +45,26 @@ function listarProductos() {
           ? producto.categoria.nombre
           : "Sin categoría";
 
+        const imagen = producto.imagenUrl
+          ? producto.imagenUrl
+          : "img/productos/default.jpg";
+
         tabla.innerHTML += `
           <tr>
             <td>#${producto.id}</td>
+
+            <td>
+              <img
+                src="${imagen}"
+                alt="${producto.nombre}"
+                class="tabla-img"
+              >
+            </td>
+
             <td>${producto.nombre}</td>
             <td>S/ ${Number(producto.precio).toFixed(2)}</td>
             <td>${categoriaNombre}</td>
+
             <td>
               <button class="btn-editar" onclick="editarProducto(${producto.id})">
                 Editar
@@ -74,15 +88,17 @@ function guardarProducto() {
   const nombre = document.getElementById("nombre").value.trim();
   const precio = document.getElementById("precio").value;
   const categoriaId = document.getElementById("categoria").value;
+  const imagenUrl = document.getElementById("imagenUrl").value.trim();
 
   if (!nombre || !precio || !categoriaId) {
-    alert("Completa todos los campos.");
+    alert("Completa nombre, precio y categoría.");
     return;
   }
 
   const producto = {
     nombre: nombre,
     precio: Number(precio),
+    imagenUrl: imagenUrl || "img/productos/default.png",
     categoria: {
       id: Number(categoriaId)
     }
@@ -130,6 +146,9 @@ function editarProducto(id) {
   if (producto.categoria) {
     document.getElementById("categoria").value = producto.categoria.id;
   }
+
+  document.getElementById("imagenUrl").value = producto.imagenUrl || "";
+  mostrarVistaPrevia();
 }
 
 function eliminarProducto(id) {
@@ -159,6 +178,19 @@ function limpiarFormulario() {
   document.getElementById("nombre").value = "";
   document.getElementById("precio").value = "";
   document.getElementById("categoria").value = "";
+  document.getElementById("imagenUrl").value = "";
+  document.getElementById("previewImagen").src = "img/productos/default.png";
+}
+
+function mostrarVistaPrevia() {
+  const imagenUrl = document.getElementById("imagenUrl").value.trim();
+  const preview = document.getElementById("previewImagen");
+
+  preview.src = imagenUrl || "img/productos/default.png";
+
+  preview.onerror = function () {
+    preview.src = "img/productos/default.png";
+  };
 }
 
 function cerrarSesion() {
